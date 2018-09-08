@@ -1,0 +1,18 @@
+obtain/jar/proguard.jar
+obtain/jar/proguardgui.jar
+obtain/jar/retrace.jar
+
+"ProGuard" "4.7"
+"http://proguard.sourceforge.net/"
+sha256sums:
+8f5165d3e3b3ba446a7ef860c66f19a080332dd8e6a74834ac7017beec4f70cd  proguard.jar
+b7b4df452e18ec48d1109f52be4f1163968556faba1622becd725c234543eb73  proguardgui.jar
+60ab6c12c87c4c4961231fa30bb122702efb194f7b777b93109747909561fa7f  retrace.jar
+
+"ProGuard" "4.9"
+"http://proguard.sourceforge.net/"
+sha256sums:
+3c8e9a6aee1d965c19d4b426596db9983fb3bff0f589bbc527973c310767d348  proguard4.9.tar.gz
+5c29d614925f41b1c4adf2e05a67671978e675fd5e5cb4462b46b5f76f5df1b1  proguard.jar
+ce42305e76ea31a8fca0b4ac288dd424d1f4a62a76ef56eac62948650c7c0d66  proguardgui.jar
+a16231bcab6108c0cd69f0cadd8207f27482a6e25fca8692b15566fffdf0080b  retrace.jar

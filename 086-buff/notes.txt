@@ -1,0 +1,2 @@
+- investigate nested append() bug (reverse order from expected) see
+  999-reject/2011y06m25d for counterexample.

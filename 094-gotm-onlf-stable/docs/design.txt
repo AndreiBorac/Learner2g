@@ -1,0 +1,8 @@
+- timecodes are transmitted as the lower order 32 bits of the
+  nanoTime() they encode. a 64-bit value is reconstructed by adding
+  the difference between the current and previous timecodes to a
+  timecode accumulator. thus at least one packet must be transmitted
+  every 4 seconds to avoid overflow. this requirement is easily met by
+  a source. to ensure that the splitter receive timecodes can always
+  be reconstructed, an unblockable "wassup" packet is introduced every
+  second.

@@ -1,0 +1,4 @@
+obtain/jar/proguard.jar
+"ProGuard" "4.6"
+"http://proguard.sourceforge.net/"
+sha256sum: f81607980ab5b67ad664c6a34dce5cc2acbf9a9ba2d44594b0c2819f0083bb51

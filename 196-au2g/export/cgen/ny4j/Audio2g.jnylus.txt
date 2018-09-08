@@ -1,0 +1,35 @@
+destination java/zs42/au2g/ny4j/bind
+package zs42.au2g.ny4j.bind
+import zs42.au2g.*
+import zs42.mass.*
+import javax.sound.sampled.*
+access public
+prefixes do on
+
+interface AudioMixerEnumeratorAgent
+method ProbeMixers Class<? extends DataLine> Audio2g.AudioMixerEnumerator.ProbeMethod int
+method Shutdown
+
+interface AudioMixerEnumeratorYield
+method ProbeMixers Class<? extends DataLine> Audio2g.AudioMixerEnumerator.ProbeMethod int cL<Audio2g.MixerTarget>
+method Shutdown
+
+interface AudioRecordAgent
+method Initialize Audio2g.MixerTarget Audio2g.MixerFormat
+method Shutdown
+method GetPacket byte[]
+
+interface AudioRecordYield
+method Initialize Audio2g.MixerTarget Audio2g.MixerFormat
+method Shutdown
+method GetPacket byte[] boolean long Audio2g.MixerFormat
+
+interface AudioReplayAgent
+method Initialize Audio2g.MixerTarget Audio2g.MixerFormat
+method Shutdown
+method PutPacket byte[] long long Object
+
+interface AudioReplayYield
+method Initialize Audio2g.MixerTarget Audio2g.MixerFormat
+method Shutdown
+method PutPacket byte[] long long Object boolean long

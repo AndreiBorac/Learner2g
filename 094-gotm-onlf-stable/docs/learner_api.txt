@@ -1,0 +1,36 @@
+::UserInterface
+::::Control
+putLine(String line) void
+::::Callback
+gotMute(boolean enabled) void
+gotStatic(boolean enabled) void
+gotTarget(AudioCommon.Target target) void
+gotFormat(AudioCommon.Format format) void
+gotVolume(double volume) void
+gotUserFeedback(String line) void
+::::static
+launch(Callback callback, AudioCommon.Target[] targets) void
+
+::SplitterClient
+::::Control
+putStreamSelectVector(long vector) void
+putLine(String line) void
+::::Callback
+gotPacket(int stream_id, long source_tc, long server_tc, long client_tc, GroupirPacket packet) void
+gotStopCondition() void
+::::static
+launch(Callback callback, String host, int port, byte[] pass_user) Control
+
+::AudioReader
+::::Control
+putFinish() void
+::::Callback
+gotBatch(Format, byte[] buf, int off, int lim) void
+::::static
+launch(F1<Target, Target[]> select, Format format, int batchz, Callback callback) Control
+
+::AudioWriter
+::::Callback
+getPacket(Format format) AudioWriter.Packet
+::::static
+launch(Callback callback) Target[]

@@ -1,0 +1,3 @@
+commit 8e3a85e3becf26fcf8911002d32f8a2cb2ba5754 - before restart fixes
+commit 981057dd493a4e0c209fa97a7f9bf4e3466dcdaf - before updating to drastic changes
+commit e06599507e497c9b49a3194ae04b5adbb505ce41 - before revamping getAudioPacketSamples

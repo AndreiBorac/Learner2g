@@ -1,0 +1,2 @@
+for now, decoding cannot be done in-place; it requires the prev and
+next framebuffers to be distinct.

@@ -1,0 +1,135 @@
+TODO:
+---> volume boost (amplify after mic or at client end)
+---> scroll pane for feedback history (can't grow indef.)
+
+upgrading with remote desktop capability:
+- in GrandUnifiedInterconnect::gotPacket add a case for STREAM_ID_VIDEO
+- add a video packet queue to the state of type ::VideoPacket
+- add a class UserInterface::Packet
+---> which doesn't need any timecodes; codec payload data only
+- add a UserInterface::Callback
+---> UserInterface.Packet getPacket()
+- handler of this callback in GrandUnifiedInterconnect should:
+---> if the current time is greater than the render time of the next frame
+---> return the next frame data as a UserInterface.Packet
+- the top of update() should:
+---> while getPacket() returns non-null:
+---> decode the packet and set dirty all changed tiles
+
+
+teacher:   audio_source_tc      video_source_tc
+             \                    \
+student:      aframe_tc            now
+
+if ((now - aframe_tc) > (video_source_tc - source_tc)) {
+    issue frame
+}
+
+GUI sets aframe_tc before sending to AudioWriter
+
+av_sync_audio_tc = audio_source_tc - audio_delay
+
+TASKS:
+
+- ban (or, at least, audit all) static and handle applet start()
+  stop() appropriately in all cases or perhaps a ban on static is too
+  radical (?)
+
+- automatic reconnection support
+---> dim the screen as a visual indication?
+
+- cursor position updates
+- xor filter before rle
+- copyregion(s)
+
+- change av sync algorithm to add smoothing
+---> are we more than one/two packets of audio ahead/behind?
+---> if so, simply slam the correct value in
+---> otherwise, do not change the frame_tc directly, but instead, set
+     a "drift" parameter to smoothly adjust by up to X milliseconds
+     over the duration of the next audio packet
+
+- late-join support
+---> don't download everything
+---> separate keyframe channel?
+- multiple (selectable) bitrate support
+- send keyframe data
+
+- synchronizer: sign of audio_delay_us, 
+- text area in StudentApplet
+
+- support for quizzes
+-- instructor opens paper in shared window
+-- instructor enters worksheet id
+-- student sends question # and ABCDE or grid-in answer
+-- matched to ans key
+-- diagnostic built into student profile
+-- level must be analyzed
+-- worksheet: unique id, topic, answers, difficulty
+
+- get rid of back buffer
+
+- report to splitter using a dedicated feedback line
+-- receive timestamp for each packet along with packet type
+-- length of audio queue after settling reserve queue
+-- video packet queue length
+
+- decode out of update() if the backlog is large
+-- based on number of video packets
+-- starting a thread
+
+- add commands to set min and max audio queue length
+-- add to the command interface
+- rewrite behavior on queue overflow
+
+
+make encoder set packet.supress if the decoding complexity is high
+- pass decoding task with a linked blocking queue
+while (packet.supress) push the frames to lbq
+upstream forces packet.supress for sufficiently complex frames
+awt thread maintains a counter of outstanding decode operations
++1 when adding to lbq
+-1 when retrieving from return queue
+decode thread pushes a token to return queue (any non-null object)
+
+GC monitoring:
+
+appletviewer -J-verbose:gc -J-XX:+PrintGCTimeStamps -J-XX:+PrintGCDetails -J-Xloggc:gc.log http://httptest/applet.html </dev/null 2>&1 | sed -e 's/^/applet: /' &
+
+
+Exception in thread "TimerQueue" java.lang.IllegalMonitorStateException
+at java.util.concurrent.locks.ReentrantLock$Sync.tryRelease(ReentrantLock.java:155)
+at java.util.concurrent.locks.AbstractQueuedSynchronizer.release(AbstractQueuedSynchronizer.java:1262)
+at java.util.concurrent.locks.ReentrantLock.unlock(ReentrantLock.java:459)
+at java.util.concurrent.DelayQueue.take(DelayQueue.java:205)
+at javax.swing.TimerQueue.run(TimerQueue.java:166)
+at java.lang.Thread.run(Thread.java:636)
+
+
+Changes to splitter server
+
+end    from     to
+root   listen   connect
+user   listen   listen
+stop   listen   listen
+
+post.sh:
+socat runs on http machine and binds root end of root splitter to port that will be connected to by the client
+
+scheme for generating passwords
+scheme for verifying password validity
+password -> (student name, server id)
+encoding permutation using a different shift amount for each byte pos
+hex passw
+valid passwords will  be palindromes when decoded (subtracting the shift amount
+
+passwd generation
+ - generate n/2 bytes, n=8 then mirror
+ - encode using the var shifts
+ - bintohex
+passwd verification
+ - hextobin
+ - decode
+ - check if palidromic
+
+lsof -n | egrep ESTAB  

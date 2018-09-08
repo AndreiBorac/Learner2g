@@ -1,0 +1,74 @@
+destination java/zs42/learner2g/lantern2g/ny4j/bind
+package zs42.learner2g.lantern2g.ny4j.bind
+import gotm.etch.*
+import zs42.mass.*
+import zs42.ny4j.*
+import java.util.*
+access public
+prefixes do on
+
+interface UserInterfaceAgent
+
+method Initialize HashMap<String,String> boolean F2<Nothing,Integer,Integer>
+method Shutdown
+method ReplaceWatchdogStatus String
+method ReplaceMixerChoices ArrayList<String>
+method ResetFormatChoices
+method RaiseEtch
+method RaiseNwed
+method SubmitEtchEvents ArrayList<Etch.InputEvent>
+method SubmitEtchEventBundle Etch.EventBundleInputEvent
+method SubmitNwedEvents ArrayList<Integer>
+
+interface UserInterfaceYield
+
+method Initialize HashMap<String,String> boolean F2<Nothing,Integer,Integer>
+method Shutdown
+method ReplaceWatchdogStatus String
+method ReplaceMixerChoices ArrayList<String>
+method ResetFormatChoices
+method RaiseEtch
+method RaiseNwed
+method SubmitEtchEvents ArrayList<Etch.InputEvent>
+method SubmitEtchEventBundle Etch.EventBundleInputEvent
+method SubmitNwedEvents ArrayList<Integer>
+
+method MixerSelect int
+method FormatSelect int
+method VolumeLevel int int
+method StaticCheckbox boolean
+method SilentCheckbox boolean
+method Rewind
+method SetSkipSilence boolean
+method Feedback String
+method FrameClose
+
+interface NetworkEndpointAgent
+method Shutdown
+method Initialize String[] JNylus.Linkage JNylus.Linkage NetworkIncomingYield NetworkOutgoingYield
+method Close
+
+interface NetworkEndpointYield
+method Shutdown
+method Initialize String[] JNylus.Linkage JNylus.Linkage NetworkIncomingYield NetworkOutgoingYield boolean NetworkIncomingAgent NetworkOutgoingAgent
+method Close
+
+interface NetworkIncomingAgent
+method Shutdown
+method ShutdownIncoming
+method Recv byte[] int int
+
+interface NetworkIncomingYield
+method Shutdown
+method ShutdownIncoming
+method Recv byte[] int int int
+
+interface NetworkOutgoingAgent
+method Shutdown
+method ShutdownOutgoing
+method Send byte[] int int
+
+interface NetworkOutgoingYield
+method Shutdown
+method ShutdownOutgoing
+method Send byte[] int int int
